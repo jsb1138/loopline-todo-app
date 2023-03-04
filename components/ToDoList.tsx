@@ -13,12 +13,13 @@ export default function ToDoList() {
 
   return (
     <>
-      <section className="todo-list" ref={parent}>
-        {todos.map((todo) => (
-          <SingleTodo key={todo.id} {...todo} />
-        ))}
+      <section className="todo-list">
+        <div className="todo-list-container" ref={parent}>
+          {todos.map((todo) => (
+            <SingleTodo key={todo.id} {...todo} />
+          ))}
+        </div>
       </section>
-      <div className="fade-out"></div>
     </>
   );
 }

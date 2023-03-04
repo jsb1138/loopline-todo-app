@@ -28,34 +28,39 @@ function NewToDo() {
 
   return (
     <>
-      <p
-        className={`error-msg w100 cf ${formInvalid ? "show-msg" : "hide-msg"}`}
-      >
-        <strong>Please fill in both inputs!</strong>
-      </p>
-      <form id="todo-form" onSubmit={submitHandler}>
-        <label htmlFor="title"></label>
-        <input
-          type="text"
-          id="title"
-          name="title"
-          placeholder="Title"
-          value={title}
-          onChange={onTitleChange}
-        />
-        <label htmlFor="todo-desc" className="cf"></label>
-        <input
-          type="text"
-          id="todo-desc"
-          name="todo-desc"
-          placeholder="What is your to-do?"
-          value={desc}
-          onChange={onDescChange}
-        />
-        <button type="submit" className="add-btn cf">
-          +
-        </button>
-      </form>
+      <div className="form-container">
+        <p
+          className={`error-msg w100 cf ${
+            formInvalid ? "show-msg" : "hide-msg"
+          }`}
+        >
+          <strong>Please fill in both inputs!</strong>
+        </p>
+        <form id="todo-form" onSubmit={submitHandler}>
+          <label htmlFor="title"></label>
+          <input
+            type="text"
+            id="title"
+            name="title"
+            placeholder="Title"
+            value={title}
+            onChange={onTitleChange}
+          />
+          <label htmlFor="todo-desc" className="cf"></label>
+          <input
+            type="text"
+            id="todo-desc"
+            name="todo-desc"
+            placeholder="What is your to-do?"
+            value={desc}
+            onChange={onDescChange}
+          />
+          <button type="submit" className="add-btn cf">
+            +
+          </button>
+        </form>
+      </div>
+      <div className="fade-out"></div>
     </>
   );
 }

@@ -12,13 +12,12 @@ function App() {
   }
   return (
     <>
-      <main className="cfc">
-        <h1>Todos</h1>
-        <TodoList />
-        <NewTodo />
-        <BatchDeleteButton />
-        <div className="bg-click-area" onClick={deselectHandler}></div>
-      </main>
+      {/* <main> */}
+      <TodoList />
+      <NewTodo />
+      <BatchDeleteButton />
+      <div className="bg-click-area" onClick={deselectHandler}></div>
+      {/* </main> */}
     </>
   );
 }

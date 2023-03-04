@@ -7,6 +7,8 @@ import "@/styles/globals.css";
 import type { AppProps } from "next/app";
 import { saveState } from "@/local-storage";
 
+import Header from "@/components/Header";
+
 store.subscribe(() => {
   saveState(store.getState());
 });
@@ -20,6 +22,7 @@ export default function App({ Component, pageProps }: AppProps) {
         loading={<div className="w100 h100 cf">LOADING...</div>}
         persistor={persistor}
       >
+        <Header />
         <Component {...pageProps} />
       </PersistGate>
     </Provider>
