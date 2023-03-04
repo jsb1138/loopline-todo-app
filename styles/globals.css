@@ -245,6 +245,10 @@ button {
   width: 100%;
 }
 
+.h100 {
+  height: 100vh;
+}
+
 .cf {
   display: flex;
   justify-content: center;

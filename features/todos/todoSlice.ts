@@ -58,9 +58,9 @@ const todoSlice = createSlice({
 //   },
 // },
 
-export const { addTodos } = todoSlice.actions;
+export const { addTodos, removeTodos } = todoSlice.actions;
 
-// removeTodos, updateTodos, completeTodos
+// updateTodos, completeTodos
 
 export const selectTodos = (state) => state.todos;
 

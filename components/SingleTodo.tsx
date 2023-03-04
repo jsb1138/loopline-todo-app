@@ -1,7 +1,14 @@
 import { useSelector } from "react-redux";
-import { selectTodos } from "@/features/todos/todoSlice";
+import { useDispatch } from "react-redux";
+import { removeTodos } from "@/features/todos/todoSlice";
 
 export default function SingleTodo(todo) {
+  const dispatch = useDispatch();
+
+  function clickHandler(id) {
+    dispatch(removeTodos(id));
+  }
+
   return (
     <div className="todo fcsb" key={todo.id}>
       <div className="todo-content">
@@ -9,7 +16,9 @@ export default function SingleTodo(todo) {
         <p>{todo.desc}</p>
       </div>
       <div className="todo-actions fcsbc">
-        <button className="action-btn cf">X</button>
+        <button className="action-btn cf" onClick={() => clickHandler(todo.id)}>
+          X
+        </button>
         <button className="action-btn cf">E</button>
       </div>
     </div>
