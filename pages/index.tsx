@@ -12,12 +12,10 @@ function App() {
   }
   return (
     <>
-      {/* <main> */}
       <TodoList />
       <NewTodo />
       <BatchDeleteButton />
       <div className="bg-click-area" onClick={deselectHandler}></div>
-      {/* </main> */}
     </>
   );
 }

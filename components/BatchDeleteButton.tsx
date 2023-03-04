@@ -2,6 +2,7 @@ import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { getTodos } from "@/features/todos/todoSlice";
 import { deleteSelectedTodos } from "@/features/todos/todoSlice";
+import DeleteAllIcon from "@/components/Icons/DeleteAllIcon";
 import { store } from "@/store";
 
 export default function BatchDeleteButton() {
@@ -19,7 +20,7 @@ export default function BatchDeleteButton() {
       }`}
       onClick={batchDeleteHandler}
     >
-      BatchDeleteButton
+      <DeleteAllIcon />
     </div>
   );
 }

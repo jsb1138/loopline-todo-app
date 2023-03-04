@@ -1,6 +1,10 @@
 import { useState } from "react";
-// import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
+import { getTodos } from "@/features/todos/todoSlice";
+import EditIcon from "@/components/Icons/EditIcon";
+import DeleteIcon from "@/components/Icons/DeleteIcon";
+import CancelIcon from "@/components/Icons/CancelIcon";
 import {
   removeTodos,
   updateTodos,
@@ -20,6 +24,7 @@ type Todo = {
 };
 
 export default function SingleTodo(todo: Todo) {
+  const todos = useSelector(getTodos);
   const dispatch = useDispatch();
   const [canEdit, setCanEdit] = useState(false);
   const [title, setTitle] = useState("");
@@ -39,11 +44,6 @@ export default function SingleTodo(todo: Todo) {
 
   function updateHandler(id, title, desc) {
     dispatch(deselectTodos(null));
-    // if (todo.selected) {
-    //   dispatch(editSelect({ type: "DESELECT", id }));
-    // } else {
-    //   dispatch(editSelect({ type: "SELECT", id }));
-    // }
     dispatch(editSelect({ type: "SELECT", id }));
     setTitle(title);
     setDesc(desc);
@@ -57,6 +57,11 @@ export default function SingleTodo(todo: Todo) {
   }
 
   function handleSelect(id) {
+    if (todo.editing) {
+      console.log("editing");
+      cancelUpdateHandler(id);
+      dispatch(editSelect({ type: "DESELECT ALL" }));
+    }
     if (todo.selected) {
       dispatch(selectTodos({ type: "DESELECT", id }));
       return;
@@ -100,9 +105,7 @@ export default function SingleTodo(todo: Todo) {
                 value={desc}
                 onChange={onDescChange}
               />
-              <button type="submit" className="edit-btn cf">
-                +
-              </button>
+              <input type="submit" className="hidden-btn" />
             </form>
           </div>
           <div className="todo-actions fcsbc">
@@ -110,7 +113,10 @@ export default function SingleTodo(todo: Todo) {
               className="action-btn cf"
               onClick={() => cancelUpdateHandler(todo.id)}
             >
-              C
+              <CancelIcon />
+            </button>
+            <button type="submit" className="action-btn cf">
+              +
             </button>
           </div>
         </>
@@ -125,13 +131,13 @@ export default function SingleTodo(todo: Todo) {
               className="action-btn cf"
               onClick={() => deleteHandler(todo.id)}
             >
-              X
+              <DeleteIcon />
             </button>
             <button
               className="action-btn cf"
               onClick={() => updateHandler(todo.id, todo.title, todo.desc)}
             >
-              E
+              <EditIcon />
             </button>
           </div>
         </>
