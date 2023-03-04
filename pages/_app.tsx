@@ -8,7 +8,6 @@ import type { AppProps } from "next/app";
 import { saveState } from "@/local-storage";
 
 store.subscribe(() => {
-  console.log(store.getState());
   saveState(store.getState());
 });
 

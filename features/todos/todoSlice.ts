@@ -1,9 +1,6 @@
 import { createSlice, nanoid } from "@reduxjs/toolkit";
 
-const initialState = [
-  // { id: 2198287652875, title: "test1", desc: "1111111" },
-  // { id: 2198787454875, title: "test2", desc: "222222" },
-];
+const initialState = [];
 
 const todoSlice = createSlice({
   name: "todos",
@@ -35,6 +32,7 @@ const todoSlice = createSlice({
         if (todo.id === action.payload.id) {
           return {
             ...todo,
+            title: action.payload.title,
             desc: action.payload.desc,
           };
         }
@@ -71,7 +69,7 @@ const todoSlice = createSlice({
 //   },
 // },
 
-export const { addTodos, removeTodos } = todoSlice.actions;
+export const { addTodos, removeTodos, updateTodos } = todoSlice.actions;
 
 // updateTodos, completeTodos
 
