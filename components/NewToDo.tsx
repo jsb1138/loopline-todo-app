@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { nanoid } from "@reduxjs/toolkit";
 import { addTodos } from "@/features/todos/todoSlice";
 
 function NewToDo() {
@@ -16,13 +15,7 @@ function NewToDo() {
     event.preventDefault();
 
     if (title && desc) {
-      dispatch(
-        addTodos({
-          id: nanoid(),
-          title,
-          desc,
-        })
-      );
+      dispatch(addTodos(title, desc));
       setTitle("");
       setDesc("");
     } else {

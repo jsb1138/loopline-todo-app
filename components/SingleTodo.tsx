@@ -2,7 +2,13 @@ import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { removeTodos } from "@/features/todos/todoSlice";
 
-export default function SingleTodo(todo) {
+type Todo = {
+  id: number;
+  title: string;
+  desc: string;
+};
+
+export default function SingleTodo(todo: Todo) {
   const dispatch = useDispatch();
 
   function clickHandler(id) {
