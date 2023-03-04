@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { nanoid } from "@reduxjs/toolkit";
-import { addTodos } from "@/redux/reducer";
+import { addTodos } from "@/features/todos/todoSlice";
 
 function NewToDo() {
   const dispatch = useDispatch();
@@ -23,23 +23,13 @@ function NewToDo() {
           desc,
         })
       );
-
       setTitle("");
       setDesc("");
-      // if (title.trim().length === 0 || desc.trim().length === 0) {
-      //   setFormInvalid(true);
-      //   setTimeout(() => {
-      //     setFormInvalid(false);
-      //   }, 1500);
-      //   return;
-      // }
-
-      // const todoData = {
-      //   title: title,
-      //   summary: desc,
-      // };
-      // console.log(todoData);
-      // onAddTask(todoData);
+    } else {
+      setFormInvalid(true);
+      setTimeout(() => {
+        setFormInvalid(false);
+      }, 2000);
     }
   }
 

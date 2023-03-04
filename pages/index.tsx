@@ -1,11 +1,14 @@
-import ToDoList from "@/components/ToDoList";
-import ToDoInput from "@/components/ToDoInput";
+import TodoList from "@/components/TodoList";
+import TodoInput from "@/components/TodoInput";
 
 function App() {
   return (
     <>
-      <ToDoList />
-      <ToDoInput />
+      <main>
+        <h1 style={{ textAlign: "center" }}>Todos</h1>
+        <TodoList />
+        <TodoInput />
+      </main>
     </>
   );
 }

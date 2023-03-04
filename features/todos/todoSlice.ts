@@ -9,9 +9,14 @@ const todoSlice = createSlice({
   name: "todos",
   initialState,
   reducers: {
+    //Adding todos
     addTodos: (state, action) => {
       state.push(action.payload);
       return state;
+    },
+    //remove todos
+    removeTodos: (state, action) => {
+      return state.filter((item) => item.id !== action.payload);
     },
   },
 });
@@ -59,4 +64,4 @@ export const { addTodos } = todoSlice.actions;
 
 export const selectTodos = (state) => state.todos;
 
-export const reducer = todoSlice.reducer;
+export const todoReducer = todoSlice.reducer;
