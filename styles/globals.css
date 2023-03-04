@@ -201,7 +201,10 @@ main {
 }
 
 #todo-form {
-  /* background-color: #7442c8; */
+  margin: 0 auto;
+  width: 60%;
+  min-width: 10rem;
+  max-width: 32rem; 
   height:9.4rem;
   padding: 1rem 0.5rem;
   display: flex;

@@ -1,6 +1,6 @@
 import { useDispatch } from "react-redux";
 import TodoList from "@/components/TodoList";
-import TodoInput from "@/components/TodoInput";
+import NewTodo from "@/components/NewTodo";
 import BatchDeleteButton from "@/components/BatchDeleteButton";
 import { deselectTodos } from "@/features/todos/todoSlice";
 
@@ -12,10 +12,10 @@ function App() {
   }
   return (
     <>
-      <main>
-        <h1 style={{ textAlign: "center" }}>Todos</h1>
+      <main className="cfc">
+        <h1>Todos</h1>
         <TodoList />
-        <TodoInput />
+        <NewTodo />
         <BatchDeleteButton />
         <div className="bg-click-area" onClick={deselectHandler}></div>
       </main>
