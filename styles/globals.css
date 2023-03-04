@@ -356,13 +356,15 @@ button {
 
 .hide {
   bottom: 100px;
-  right: -30%;
+  right: -25%;
+  opacity: 0;
   transition: 0.2s cubic-bezier(0.76, 0, 0.24, 1);
 }
 
 .show {
   bottom: 100px;
-  right: 5%;
+  right: 2%;
+  opacity: 1;
   transition: 0.2s cubic-bezier(0.76, 0, 0.24, 1);
 }
 
