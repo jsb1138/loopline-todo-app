@@ -85,6 +85,15 @@ main {
   overflow: hidden;
 }
 
+.bg-click-area {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100%;
+  z-index: 0;
+}
+
 .todo-list {
   margin: 0 auto;
   width: 80%;
@@ -96,7 +105,7 @@ main {
 .fade-out {
   margin: 0 auto;
   width: 80%;
-  height: 5rem;
+  height: 3rem;
   /* opacity: 0; */
   transition: opacity 0.5s;
   background: linear-gradient(
@@ -104,7 +113,8 @@ main {
     #dbdbdb 
   );
   position: relative;
-  bottom: 80px;
+  bottom: 48px;
+  z-index: 10;
 }
 
 .todo {
@@ -117,12 +127,23 @@ main {
   box-shadow: var(--shadow);
   min-height: 100px;
   max-width: 40rem;
-  transition: 0.2s
+  z-index: 1;
+  transition: 0.2s;
+  z-index: 10;
+  position: relative;
 }
-
+/* 
 .todo:hover {
   background-color: rgb(243, 255, 248);
   transition: 0.2s
+} */
+
+.slctd-del {
+  background-color: rgb(255, 203, 203);
+}
+
+.slctd-edit {
+  background-color: rgb(220, 255, 220);
 }
 
 .todo-content {
@@ -165,6 +186,7 @@ main {
   position: fixed;
   bottom: 0;
   margin-bottom: 2rem;
+  z-index: 10;
 }
 
 .todo-input {
@@ -186,6 +208,7 @@ main {
   flex-direction: column;
   justify-content: space-between;
   position: relative;
+  z-index: 10;
 }
 
 #title, #todo-desc, button {
@@ -226,6 +249,7 @@ main {
   font-size: 1rem;
   font-weight: 400;
   margin: 0;
+  background-color: rgb(220, 255, 220);
 }
 
 #title-edit {
@@ -323,6 +347,23 @@ label {
 button {
   width: 40px;
   height: 40px;
+}
+
+.batch-del-btn {
+  position: absolute;
+  z-index: 10;
+}
+
+.hide {
+  bottom: 100px;
+  right: -30%;
+  transition: 0.2s cubic-bezier(0.76, 0, 0.24, 1);
+}
+
+.show {
+  bottom: 100px;
+  right: 5%;
+  transition: 0.2s cubic-bezier(0.76, 0, 0.24, 1);
 }
 
 /* util classes */

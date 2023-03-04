@@ -18,6 +18,7 @@ const todoSlice = createSlice({
             id: nanoid(),
             title,
             desc,
+            selected: false,
           },
         };
       },
@@ -39,40 +40,93 @@ const todoSlice = createSlice({
         return todo;
       });
     },
+    selectTodos: (state, action) => {
+      switch (action.payload.type) {
+        case "SELECT":
+          return state.map((todo) => {
+            if (todo.id === action.payload.id) {
+              return {
+                ...todo,
+                selected: true,
+              };
+            }
+            return todo;
+          });
+        case "DESELECT":
+          return state.map((todo) => {
+            if (todo.id === action.payload.id) {
+              return {
+                ...todo,
+                selected: false,
+              };
+            }
+            return todo;
+          });
+        default:
+          return state;
+      }
+    },
+    deselectTodos: (state, action) => {
+      return state.map((todo) => {
+        return {
+          ...todo,
+          selected: false,
+        };
+        return todo;
+      });
+    },
+    editSelect: (state, action) => {
+      switch (action.payload.type) {
+        case "SELECT":
+          return state.map((todo) => {
+            if (todo.id === action.payload.id) {
+              return {
+                ...todo,
+                editing: true,
+              };
+            }
+            return todo;
+          });
+        case "DESELECT":
+          return state.map((todo) => {
+            if (todo.id === action.payload.id) {
+              return {
+                ...todo,
+                editing: false,
+              };
+            }
+            return todo;
+          });
+        case "DESELECT ALL":
+          return state.map((todo) => {
+            return {
+              ...todo,
+              editing: false,
+            };
+            return todo;
+          });
+        default:
+          return state;
+      }
+    },
+    deleteSelectedTodos: (state, action) => {
+      return state.filter((item) => item.selected !== true);
+    },
   },
 });
 
-// {
-//   //update todos
-//   updateTodos: (state, action) => {
-//     return state.map((todo) => {
-//       if (todo.id === action.payload.id) {
-//         return {
-//           ...todo,
-//           item: action.payload.item,
-//         };
-//       }
-//       return todo;
-//     });
-//   },
-//   //completed
-//   completeTodos: (state, action) => {
-//     return state.map((todo) => {
-//       if (todo.id === action.payload) {
-//         return {
-//           ...todo,
-//           completed: true,
-//         };
-//       }
-//       return todo;
-//     });
-//   },
-// },
-
-export const { addTodos, removeTodos, updateTodos } = todoSlice.actions;
+export const {
+  addTodos,
+  removeTodos,
+  updateTodos,
+  selectTodos,
+  deselectTodos,
+  editSelect,
+  deleteSelectedTodos,
+} = todoSlice.actions;
 
 // updateTodos, completeTodos
 
-export const selectTodos = (state) => state.todos;
+export const getTodos = (state) => state.todos;
 
 export const todoReducer = todoSlice.reducer;

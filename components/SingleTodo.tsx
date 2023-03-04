@@ -1,12 +1,22 @@
 import { useState } from "react";
 // import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
-import { removeTodos, updateTodos } from "@/features/todos/todoSlice";
+import {
+  removeTodos,
+  updateTodos,
+  selectTodos,
+  deselectTodos,
+  editSelect,
+} from "@/features/todos/todoSlice";
+
+import { store } from "@/store";
 
 type Todo = {
   id: number;
   title: string;
   desc: string;
+  selected: boolean;
+  editing: boolean;
 };
 
 export default function SingleTodo(todo: Todo) {
@@ -22,20 +32,51 @@ export default function SingleTodo(todo: Todo) {
     dispatch(removeTodos(id));
   }
 
-  function updateHandler(title, desc) {
+  function cancelUpdateHandler(id) {
+    setCanEdit(!canEdit);
+    dispatch(editSelect({ type: "DESELECT", id }));
+  }
+
+  function updateHandler(id, title, desc) {
+    dispatch(deselectTodos(null));
+    if (todo.selected) {
+      dispatch(editSelect({ type: "DESELECT", id }));
+    } else {
+      dispatch(editSelect({ type: "SELECT", id }));
+    }
+    dispatch(editSelect({ type: "SELECT", id }));
     setTitle(title);
     setDesc(desc);
     setCanEdit(!canEdit);
-    // dispatch(updateTodos({ id, title, desc }));
   }
 
   function updateSubmissionHandler(id, title, desc) {
     setCanEdit(!canEdit);
     dispatch(updateTodos({ id, title, desc }));
+    dispatch(editSelect({ type: "DESELECT", id }));
+  }
+  // console.log(todo);
+  console.log("GET STATE::: ", store.getState());
+  function handleSelect(id) {
+    if (todo.selected) {
+      dispatch(selectTodos({ type: "DESELECT", id }));
+      return;
+    }
+    dispatch(selectTodos({ type: "SELECT", id }));
   }
 
   return (
-    <div className="todo fcsb" key={todo.id}>
+    <div
+      className={`todo fcsb ${todo.selected && "slctd-del"} ${
+        todo.editing && "slctd-edit"
+      }`}
+      key={todo.id}
+      onClick={(e) => {
+        if (e.ctrlKey || e.metaKey) {
+          handleSelect(todo.id);
+        }
+      }}
+    >
       {canEdit ? (
         <>
           <div className="todo-content">
@@ -68,7 +109,7 @@ export default function SingleTodo(todo: Todo) {
           <div className="todo-actions fcsbc">
             <button
               className="action-btn cf"
-              onClick={() => setCanEdit(!canEdit)}
+              onClick={() => cancelUpdateHandler(todo.id)}
             >
               C
             </button>
@@ -83,13 +124,13 @@ export default function SingleTodo(todo: Todo) {
           <div className="todo-actions fcsbc">
             <button
               className="action-btn cf"
-              onClick={() => clickHandler(todo.id)}
+              onClick={() => deleteHandler(todo.id)}
             >
               X
             </button>
             <button
               className="action-btn cf"
-              onClick={() => updateHandler(todo.title, todo.desc)}
+              onClick={() => updateHandler(todo.id, todo.title, todo.desc)}
             >
               E
             </button>
