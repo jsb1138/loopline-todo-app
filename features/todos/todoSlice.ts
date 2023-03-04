@@ -1,6 +1,28 @@
 import { createSlice, nanoid } from "@reduxjs/toolkit";
 
-const initialState = [];
+const initialState = [
+  {
+    id: "AtpyBwYz53bBD9HSjRh6n",
+    title: "These are the todos!",
+    desc: "This is where you can describe your to do.",
+    editing: false,
+    selected: false,
+  },
+  {
+    id: "A3bBD9HSjRh6ntpyBwYz5",
+    title: "Edit or delete todos",
+    desc: "Using the controls on the right.",
+    editing: false,
+    selected: false,
+  },
+  {
+    id: "pBw3bBD9HSjRh6AD9Hnt9HySjpyBwYz5",
+    title: "Control click to select",
+    desc: "Then you can delete multiple todos at once.",
+    editing: false,
+    selected: false,
+  },
+];
 
 const todoSlice = createSlice({
   name: "todos",
@@ -18,6 +40,7 @@ const todoSlice = createSlice({
             id: nanoid(),
             title,
             desc,
+            editing: false,
             selected: false,
           },
         };
@@ -40,6 +63,7 @@ const todoSlice = createSlice({
         return todo;
       });
     },
+    //select todos
     selectTodos: (state, action) => {
       switch (action.payload.type) {
         case "SELECT":
@@ -66,6 +90,7 @@ const todoSlice = createSlice({
           return state;
       }
     },
+    // deselect all todos
     deselectTodos: (state, action) => {
       return state.map((todo) => {
         return {
@@ -75,6 +100,7 @@ const todoSlice = createSlice({
         return todo;
       });
     },
+    // edit select
     editSelect: (state, action) => {
       switch (action.payload.type) {
         case "SELECT":
@@ -109,6 +135,7 @@ const todoSlice = createSlice({
           return state;
       }
     },
+    // delete selected todos
     deleteSelectedTodos: (state, action) => {
       return state.filter((item) => item.selected !== true);
     },
@@ -124,8 +151,6 @@ export const {
   editSelect,
   deleteSelectedTodos,
 } = todoSlice.actions;
-
-// updateTodos, completeTodos
 
 export const getTodos = (state) => state.todos;
 

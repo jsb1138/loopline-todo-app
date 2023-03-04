@@ -20,10 +20,10 @@ type Todo = {
 };
 
 export default function SingleTodo(todo: Todo) {
+  const dispatch = useDispatch();
   const [canEdit, setCanEdit] = useState(false);
   const [title, setTitle] = useState("");
   const [desc, setDesc] = useState("");
-  const dispatch = useDispatch();
 
   const onTitleChange = (e) => setTitle(e.target.value);
   const onDescChange = (e) => setDesc(e.target.value);
@@ -39,11 +39,11 @@ export default function SingleTodo(todo: Todo) {
 
   function updateHandler(id, title, desc) {
     dispatch(deselectTodos(null));
-    if (todo.selected) {
-      dispatch(editSelect({ type: "DESELECT", id }));
-    } else {
-      dispatch(editSelect({ type: "SELECT", id }));
-    }
+    // if (todo.selected) {
+    //   dispatch(editSelect({ type: "DESELECT", id }));
+    // } else {
+    //   dispatch(editSelect({ type: "SELECT", id }));
+    // }
     dispatch(editSelect({ type: "SELECT", id }));
     setTitle(title);
     setDesc(desc);
@@ -55,8 +55,7 @@ export default function SingleTodo(todo: Todo) {
     dispatch(updateTodos({ id, title, desc }));
     dispatch(editSelect({ type: "DESELECT", id }));
   }
-  // console.log(todo);
-  console.log("GET STATE::: ", store.getState());
+
   function handleSelect(id) {
     if (todo.selected) {
       dispatch(selectTodos({ type: "DESELECT", id }));

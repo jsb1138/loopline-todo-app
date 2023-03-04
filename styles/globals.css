@@ -78,6 +78,7 @@ html, body {
     #efefef,
     #d4d4d4 
   );
+  overflow: hidden;
 }
 
 main {
@@ -113,7 +114,7 @@ main {
     #dbdbdb 
   );
   position: relative;
-  bottom: 48px;
+  bottom: 46px;
   z-index: 10;
 }
 
@@ -211,6 +212,7 @@ main {
   flex-direction: column;
   justify-content: space-between;
   position: relative;
+  bottom: 0.4rem;
   z-index: 10;
 }
 
@@ -337,7 +339,7 @@ label {
 }
 
 .show-msg {
-  bottom: -0.5rem;
+  bottom: 0rem;
   transition: 0.1s;
 }
 
