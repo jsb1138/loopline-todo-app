@@ -45,6 +45,7 @@ function NewToDo() {
             placeholder="Title"
             value={title}
             onChange={onTitleChange}
+            autoFocus
           />
           <label htmlFor="todo-desc" className="cf"></label>
           <input
