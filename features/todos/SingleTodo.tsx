@@ -1,7 +1,5 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { useSelector } from "react-redux";
-import { getTodos } from "@/features/todos/todoSlice";
 import EditIcon from "@/components/Icons/EditIcon";
 import DeleteIcon from "@/components/Icons/DeleteIcon";
 import CancelIcon from "@/components/Icons/CancelIcon";
@@ -13,8 +11,6 @@ import {
   editSelect,
 } from "@/features/todos/todoSlice";
 
-import { store } from "@/store";
-
 type Todo = {
   id: number;
   title: string;
@@ -24,25 +20,24 @@ type Todo = {
 };
 
 export default function SingleTodo(todo: Todo) {
-  const todos = useSelector(getTodos);
   const dispatch = useDispatch();
-  const [canEdit, setCanEdit] = useState(false);
-  const [title, setTitle] = useState("");
-  const [desc, setDesc] = useState("");
+  const [canEdit, setCanEdit] = useState<boolean>(false);
+  const [title, setTitle] = useState<string>("");
+  const [desc, setDesc] = useState<string>("");
 
   const onTitleChange = (e) => setTitle(e.target.value);
   const onDescChange = (e) => setDesc(e.target.value);
 
-  function deleteHandler(id) {
+  function deleteHandler(id: number) {
     dispatch(removeTodos(id));
   }
 
-  function cancelUpdateHandler(id) {
+  function cancelUpdateHandler(id: number) {
     setCanEdit(!canEdit);
     dispatch(editSelect({ type: "DESELECT", id }));
   }
 
-  function updateHandler(id, title, desc) {
+  function updateHandler(id: number, title: string, desc: string) {
     dispatch(deselectTodos(null));
     dispatch(editSelect({ type: "SELECT", id }));
     setTitle(title);
@@ -50,15 +45,14 @@ export default function SingleTodo(todo: Todo) {
     setCanEdit(!canEdit);
   }
 
-  function updateSubmissionHandler(id, title, desc) {
+  function updateSubmissionHandler(id: number, title: string, desc: string) {
     setCanEdit(!canEdit);
     dispatch(updateTodos({ id, title, desc }));
     dispatch(editSelect({ type: "DESELECT", id }));
   }
 
-  function handleSelect(id) {
+  function handleSelect(id: number) {
     if (todo.editing) {
-      console.log("editing");
       cancelUpdateHandler(id);
       dispatch(editSelect({ type: "DESELECT ALL" }));
     }
@@ -115,7 +109,11 @@ export default function SingleTodo(todo: Todo) {
             >
               <CancelIcon />
             </button>
-            <button type="submit" className="action-btn cf">
+            <button
+              type="submit"
+              className="action-btn cf"
+              onClick={() => updateSubmissionHandler(todo.id, title, desc)}
+            >
               +
             </button>
           </div>

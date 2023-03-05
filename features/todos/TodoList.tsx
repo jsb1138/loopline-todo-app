@@ -6,7 +6,7 @@ import SingleTodo from "./SingleTodo";
 
 export default function ToDoList() {
   const todos = useSelector(getTodos);
-  const [parent, enableAnimations] = useAutoAnimate({
+  const [parent] = useAutoAnimate({
     duration: 300,
     easing: "ease-in-out",
   });

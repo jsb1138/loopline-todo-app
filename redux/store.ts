@@ -1,9 +1,9 @@
 import { configureStore, combineReducers } from "@reduxjs/toolkit";
-import { todoReducer } from "./features/todos/todoSlice";
+import { todoReducer } from "../features/todos/todoSlice";
 import storage from "redux-persist/lib/storage";
 import { persistStore, persistReducer } from "redux-persist";
 
-import { loadState } from "./local-storage";
+import { loadState } from "../utils/local-storage";
 
 const persistConfig = {
   timeout: 5,

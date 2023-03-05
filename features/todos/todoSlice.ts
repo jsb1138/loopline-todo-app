@@ -1,24 +1,31 @@
-import { createSlice, nanoid } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = [
   {
     id: "AtpyBwYz53bBD9HSjRh6n",
-    title: "These are the todos!",
-    desc: "This is where you can describe your to do.",
+    title: "This is a the to-do!",
+    desc: "And right here is the description of a to-do.",
+    editing: false,
+    selected: false,
+  },
+  {
+    id: "BbBtpDjRh6n9HwA3SyYz5",
+    title: "If you're done with a todo, delete it!",
+    desc: "This one feels very done. Hit the trash button to the right.",
     editing: false,
     selected: false,
   },
   {
     id: "A3bBD9HSjRh6ntpyBwYz5",
-    title: "Edit or delete todos",
-    desc: "Using the controls on the right.",
+    title: "You can edit to-dos!",
+    desc: "Just hit the edit button to the right... maybe if you spot a spelling errro.",
     editing: false,
     selected: false,
   },
   {
-    id: "pBw3bBD9HSjRh6AD9Hnt9HySjpyBwYz5",
-    title: "Control click to select",
-    desc: "Then you can delete multiple todos at once.",
+    id: "pBw3bBD9HSjRh6AD9Ht9H",
+    title: "You can even delete multiple to-dos at once!",
+    desc: "Just select the to-dos by ctrl-clicking (cmd-clicking on a Mac) and then click the delete button that pops up in the lower right of the screen. Easy.",
     editing: false,
     selected: false,
   },
@@ -28,29 +35,16 @@ const todoSlice = createSlice({
   name: "todos",
   initialState,
   reducers: {
-    //Adding todos
-    addTodos: {
-      reducer(state, action) {
-        state.push(action.payload);
-        return state;
-      },
-      prepare(title, desc) {
-        return {
-          payload: {
-            id: nanoid(),
-            title,
-            desc,
-            editing: false,
-            selected: false,
-          },
-        };
-      },
+    // add todos
+    addTodos: (state, action) => {
+      state.push(action.payload);
+      return state;
     },
-    //remove todos
+    // remove todos
     removeTodos: (state, action) => {
       return state.filter((item) => item.id !== action.payload);
     },
-    //update todos
+    // update todos
     updateTodos: (state, action) => {
       return state.map((todo) => {
         if (todo.id === action.payload.id) {
@@ -63,7 +57,7 @@ const todoSlice = createSlice({
         return todo;
       });
     },
-    //select todos
+    // select todos
     selectTodos: (state, action) => {
       switch (action.payload.type) {
         case "SELECT":

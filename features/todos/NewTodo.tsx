@@ -1,27 +1,36 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { addTodos } from "@/features/todos/todoSlice";
+import { nanoid } from "@reduxjs/toolkit";
 
 function NewToDo() {
   const dispatch = useDispatch();
-  const [title, setTitle] = useState("");
-  const [desc, setDesc] = useState("");
-  const [formInvalid, setFormInvalid] = useState(false);
+  const [title, setTitle] = useState<string>("");
+  const [desc, setDesc] = useState<string>("");
+  const [invalidInput, setInvalidInput] = useState<boolean>(false);
 
   const onTitleChange = (e) => setTitle(e.target.value);
   const onDescChange = (e) => setDesc(e.target.value);
 
-  function submitHandler(event) {
-    event.preventDefault();
+  function submitHandler(e) {
+    e.preventDefault();
 
     if (title && desc) {
-      dispatch(addTodos(title, desc));
+      dispatch(
+        addTodos({
+          id: nanoid(),
+          title,
+          desc,
+          editing: false,
+          selected: false,
+        })
+      );
       setTitle("");
       setDesc("");
     } else {
-      setFormInvalid(true);
+      setInvalidInput(true);
       setTimeout(() => {
-        setFormInvalid(false);
+        setInvalidInput(false);
       }, 2000);
     }
   }
@@ -31,7 +40,7 @@ function NewToDo() {
       <div className="form-container">
         <p
           className={`error-msg w100 cf ${
-            formInvalid ? "show-msg" : "hide-msg"
+            invalidInput ? "show-msg" : "hide-msg"
           }`}
         >
           <strong>Please fill in both inputs!</strong>
@@ -42,7 +51,7 @@ function NewToDo() {
             type="text"
             id="title"
             name="title"
-            placeholder="Title"
+            placeholder="What is your to-do?"
             value={title}
             onChange={onTitleChange}
             autoFocus
@@ -52,7 +61,7 @@ function NewToDo() {
             type="text"
             id="todo-desc"
             name="todo-desc"
-            placeholder="What is your to-do?"
+            placeholder="Add some details..."
             value={desc}
             onChange={onDescChange}
           />

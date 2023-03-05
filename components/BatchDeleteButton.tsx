@@ -3,7 +3,6 @@ import { useDispatch } from "react-redux";
 import { getTodos } from "@/features/todos/todoSlice";
 import { deleteSelectedTodos } from "@/features/todos/todoSlice";
 import DeleteAllIcon from "@/components/Icons/DeleteAllIcon";
-import { store } from "@/store";
 
 export default function BatchDeleteButton() {
   const todos = useSelector(getTodos);

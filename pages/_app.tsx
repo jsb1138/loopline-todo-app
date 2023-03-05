@@ -1,13 +1,13 @@
 import { Provider } from "react-redux";
-import { store } from "@/store";
+import { store } from "@/redux/store";
 import { PersistGate } from "redux-persist/integration/react";
 import { persistStore } from "redux-persist";
 
 import "@/styles/globals.css";
 import type { AppProps } from "next/app";
-import { saveState } from "@/local-storage";
+import { saveState } from "@/utils/local-storage";
 
-import Header from "@/components/Header";
+import Header from "@/features/header/Header";
 
 store.subscribe(() => {
   saveState(store.getState());
