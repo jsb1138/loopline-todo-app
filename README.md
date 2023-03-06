@@ -8,7 +8,7 @@ npm i
 npm run dev
 ```
 
-To run the tests, while the dev server is running, in a separate terminal:
+To run the tests, make sure the dev server is running and in a separate terminal enter:
 
 ```bash
 npx cypress open
