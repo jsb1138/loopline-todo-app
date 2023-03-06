@@ -120,12 +120,14 @@ export default function SingleTodo(todo: Todo) {
           </div>
           <div className="todo-actions fcsbc">
             <button
+              id="delete-btn"
               className="action-btn cf"
               onClick={() => deleteHandler(todo.id)}
             >
               <DeleteIcon />
             </button>
             <button
+              id="edit-btn"
               className="action-btn cf"
               onClick={() => updateHandler(todo.id, todo.title, todo.desc)}
             >

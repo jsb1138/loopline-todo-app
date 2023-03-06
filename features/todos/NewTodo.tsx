@@ -65,7 +65,7 @@ function NewToDo() {
             value={desc}
             onChange={onDescChange}
           />
-          <button type="submit" className="add-btn cf">
+          <button id="add-btn" type="submit" className="add-btn cf">
             +
           </button>
         </form>
