@@ -9,10 +9,10 @@ function NewToDo() {
   const [desc, setDesc] = useState<string>("");
   const [invalidInput, setInvalidInput] = useState<boolean>(false);
 
-  const onTitleChange = (e) => setTitle(e.target.value);
-  const onDescChange = (e) => setDesc(e.target.value);
+  const onTitleChange = (e: React.ChangeEvent<any>) => setTitle(e.target.value);
+  const onDescChange = (e: React.ChangeEvent<any>) => setDesc(e.target.value);
 
-  function submitHandler(e) {
+  function submitHandler(e: React.ChangeEvent<any>) {
     e.preventDefault();
 
     if (title && desc) {

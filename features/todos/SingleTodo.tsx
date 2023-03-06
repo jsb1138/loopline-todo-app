@@ -11,13 +11,7 @@ import {
   editSelect,
 } from "@/features/todos/todoSlice";
 
-type Todo = {
-  id: number;
-  title: string;
-  desc: string;
-  selected: boolean;
-  editing: boolean;
-};
+import { Todo } from "@/redux/store";
 
 export default function SingleTodo(todo: Todo) {
   const dispatch = useDispatch();
@@ -25,19 +19,19 @@ export default function SingleTodo(todo: Todo) {
   const [title, setTitle] = useState<string>("");
   const [desc, setDesc] = useState<string>("");
 
-  const onTitleChange = (e) => setTitle(e.target.value);
-  const onDescChange = (e) => setDesc(e.target.value);
+  const onTitleChange = (e: React.ChangeEvent<any>) => setTitle(e.target.value);
+  const onDescChange = (e: React.ChangeEvent<any>) => setDesc(e.target.value);
 
-  function deleteHandler(id: number) {
+  function deleteHandler(id: string | number) {
     dispatch(removeTodos(id));
   }
 
-  function cancelUpdateHandler(id: number) {
+  function cancelUpdateHandler(id: string | number) {
     setCanEdit(!canEdit);
     dispatch(editSelect({ type: "DESELECT", id }));
   }
 
-  function updateHandler(id: number, title: string, desc: string) {
+  function updateHandler(id: string | number, title: string, desc: string) {
     dispatch(deselectTodos(null));
     dispatch(editSelect({ type: "SELECT", id }));
     setTitle(title);
@@ -45,13 +39,17 @@ export default function SingleTodo(todo: Todo) {
     setCanEdit(!canEdit);
   }
 
-  function updateSubmissionHandler(id: number, title: string, desc: string) {
+  function updateSubmissionHandler(
+    id: string | number,
+    title: string,
+    desc: string
+  ) {
     setCanEdit(!canEdit);
     dispatch(updateTodos({ id, title, desc }));
     dispatch(editSelect({ type: "DESELECT", id }));
   }
 
-  function handleSelect(id: number) {
+  function handleSelect(id: string | number) {
     if (todo.editing) {
       cancelUpdateHandler(id);
       dispatch(editSelect({ type: "DESELECT ALL" }));

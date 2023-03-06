@@ -4,6 +4,8 @@ import { getTodos } from "@/features/todos/todoSlice";
 import { deleteSelectedTodos } from "@/features/todos/todoSlice";
 import DeleteAllIcon from "@/components/Icons/DeleteAllIcon";
 
+import { Todo } from "@/redux/store";
+
 export default function BatchDeleteButton() {
   const todos = useSelector(getTodos);
   const dispatch = useDispatch();
@@ -15,7 +17,9 @@ export default function BatchDeleteButton() {
   return (
     <div
       className={`batch-del-btn ${
-        todos.filter((todo) => todo.selected).length >= 1 ? "show" : "hide"
+        todos.filter((todo: Todo) => todo.selected).length >= 1
+          ? "show"
+          : "hide"
       }`}
       onClick={batchDeleteHandler}
     >

@@ -4,6 +4,8 @@ import { useAutoAnimate } from "@formkit/auto-animate/react";
 
 import SingleTodo from "./SingleTodo";
 
+import { Todo } from "@/redux/store";
+
 export default function ToDoList() {
   const todos = useSelector(getTodos);
   const [parent] = useAutoAnimate({
@@ -15,7 +17,7 @@ export default function ToDoList() {
     <>
       <section className="todo-list">
         <div className="todo-list-container" ref={parent}>
-          {todos.map((todo) => (
+          {todos.map((todo: Todo) => (
             <SingleTodo key={todo.id} {...todo} />
           ))}
         </div>

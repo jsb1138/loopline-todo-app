@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { RootState } from "@/redux/store";
 
 const initialState = [
   {
@@ -129,6 +130,10 @@ const todoSlice = createSlice({
           return state;
       }
     },
+    // get selected todos
+    getSelectedTodos: (state, action) => {
+      return state.filter((item) => item.selected === true);
+    },
     // delete selected todos
     deleteSelectedTodos: (state, action) => {
       return state.filter((item) => item.selected !== true);
@@ -143,9 +148,10 @@ export const {
   selectTodos,
   deselectTodos,
   editSelect,
+  getSelectedTodos,
   deleteSelectedTodos,
 } = todoSlice.actions;
 
-export const getTodos = (state) => state.todos;
+export const getTodos = (state: RootState) => state.todos;
 
 export const todoReducer = todoSlice.reducer;
