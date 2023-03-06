@@ -31,7 +31,7 @@ export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;
 
 export type Todo = {
-  id: string | number;
+  id: string;
   title: string;
   desc: string;
   selected: boolean;

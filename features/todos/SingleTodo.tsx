@@ -22,16 +22,16 @@ export default function SingleTodo(todo: Todo) {
   const onTitleChange = (e: React.ChangeEvent<any>) => setTitle(e.target.value);
   const onDescChange = (e: React.ChangeEvent<any>) => setDesc(e.target.value);
 
-  function deleteHandler(id: string | number) {
+  function deleteHandler(id: string) {
     dispatch(removeTodos(id));
   }
 
-  function cancelUpdateHandler(id: string | number) {
+  function cancelUpdateHandler(id: string) {
     setCanEdit(!canEdit);
     dispatch(editSelect({ type: "DESELECT", id }));
   }
 
-  function updateHandler(id: string | number, title: string, desc: string) {
+  function updateHandler(id: string, title: string, desc: string) {
     dispatch(deselectTodos(null));
     dispatch(editSelect({ type: "SELECT", id }));
     setTitle(title);
@@ -39,17 +39,13 @@ export default function SingleTodo(todo: Todo) {
     setCanEdit(!canEdit);
   }
 
-  function updateSubmissionHandler(
-    id: string | number,
-    title: string,
-    desc: string
-  ) {
+  function updateSubmissionHandler(id: string, title: string, desc: string) {
     setCanEdit(!canEdit);
     dispatch(updateTodos({ id, title, desc }));
     dispatch(editSelect({ type: "DESELECT", id }));
   }
 
-  function handleSelect(id: string | number) {
+  function handleSelect(id: string) {
     if (todo.editing) {
       cancelUpdateHandler(id);
       dispatch(editSelect({ type: "DESELECT ALL" }));
