@@ -4,7 +4,7 @@ import { RootState } from "@/redux/store";
 const initialState = [
   {
     id: "AtpyBwYz53bBD9HSjRh6n",
-    title: "This is a the to-do!",
+    title: "This is a to-do!",
     desc: "And right here is the description of a to-do.",
     editing: false,
     selected: false,
