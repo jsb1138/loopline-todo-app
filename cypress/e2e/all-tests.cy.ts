@@ -149,13 +149,13 @@ describe("Interaction tests", () => {
 
   it("should reveal the batch delete button after ctrl-clicking a todo", () => {
     cy.visit("http://localhost:3001/");
-    cy.get(".todo").contains("is a the to-do").click({ ctrlKey: true });
+    cy.get(".todo").contains("is a to-do").click({ ctrlKey: true });
     cy.get(".batch-del-btn").should("be.visible");
   });
 
   it("should delete all todos after ctrl-clicking all of them and clicking the batch delete button", () => {
     cy.visit("http://localhost:3001/");
-    cy.get(".todo").contains("is a the to-do").click({ ctrlKey: true });
+    cy.get(".todo").contains("is a to-do").click({ ctrlKey: true });
     cy.get(".todo").contains("done with").click({ ctrlKey: true });
     cy.get(".todo").contains("can edit").click({ ctrlKey: true });
     cy.get(".todo").contains("can even").click({ ctrlKey: true });
