@@ -5,7 +5,7 @@ export function loadState() {
     if (!serializedState) return undefined;
     return JSON.parse(serializedState);
   } catch (error) {
-    return undefined;
+    console.assert(error);
   }
 }
 
@@ -14,6 +14,6 @@ export async function saveState(state: any) {
     const serializedState = JSON.stringify(state);
     localStorage.setItem(KEY, serializedState);
   } catch (error) {
-    // Ignore
+    console.assert(error);
   }
 }

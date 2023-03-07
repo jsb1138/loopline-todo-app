@@ -19,8 +19,10 @@ export default function SingleTodo(todo: Todo) {
   const [title, setTitle] = useState<string>("");
   const [desc, setDesc] = useState<string>("");
 
-  const onTitleChange = (e: React.ChangeEvent<any>) => setTitle(e.target.value);
-  const onDescChange = (e: React.ChangeEvent<any>) => setDesc(e.target.value);
+  const onTitleChange = (e: React.ChangeEvent<HTMLInputElement>) =>
+    setTitle(e.target.value);
+  const onDescChange = (e: React.ChangeEvent<HTMLInputElement>) =>
+    setDesc(e.target.value);
 
   function deleteHandler(id: string) {
     dispatch(removeTodos(id));
